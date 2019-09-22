@@ -9,7 +9,11 @@ app = Starlette(debug=True)
 # A list of origins that should be permitted to make cross-origin requests
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080", "https://bird-vue.onrender.com"],
+    allow_origins=[
+        "http://localhost:8080",
+        "https://bird-vue.onrender.com",
+        "https://www.bird-vue.onrnender.com",
+    ],
 )
 
 
@@ -20,5 +24,5 @@ async def homepage(request):
 
 if __name__ == "__main__":
     if "serve" in sys.argv:
-        uvicorn.run(app, host="0.0.0.0", port=8000)
+        uvicorn.run(app, host="0.0.0.0", port=8080)
 

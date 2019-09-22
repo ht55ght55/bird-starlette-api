@@ -21,7 +21,7 @@ COPY app app/
 RUN python app/server.py
 
 # Expose the app to the world
-EXPOSE 8000
+EXPOSE 8080
 
 
 # Serve the app with uvicorn when container launches
