@@ -3,4 +3,4 @@ env: flex
 readiness_check:
   app_start_timeout_sec: 1800
 resources:
-disk_size_gb: 12
+  disk_size_gb: 12
