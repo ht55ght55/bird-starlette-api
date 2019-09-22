@@ -1,0 +1,8 @@
+torch
+torchvision
+fastai
+starlette
+uvicorn
+python-multipart
+aiofiles
+aiohttp
