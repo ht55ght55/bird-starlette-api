@@ -7,7 +7,7 @@ import uvicorn
 app = Starlette(debug=True)
 
 # A list of origins that should be permitted to make cross-origin requests
-app.add_middleware(CORSMiddleware, allow_origin_regex="http://localhost.*")
+app.add_middleware(CORSMiddleware, allow_origins=["https://bird-vue.onrender.com"])
 
 
 @app.route("/")

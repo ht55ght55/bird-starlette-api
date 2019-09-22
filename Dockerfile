@@ -15,14 +15,14 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # Then copy the app directory
-COPY . .
+COPY app app/
 
 # Run the app
-RUN python server.py
+RUN python app/server.py
 
 # Expose the app to the world
 EXPOSE 8000
 
 
 # Serve the app with uvicorn when container launches
-CMD ["python", "server.py", "serve"]
+CMD ["python", "app/server.py", "serve"]
