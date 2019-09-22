@@ -20,7 +20,9 @@ from starlette.staticfiles import StaticFiles
 #     {"openapi": "3.0.0", "info": {"title": "Example API", "version": "1.0"}}
 # )
 
-learner_file_url = "https://drive.google.com/open?id=1nkIHl2pttPFy8n0rv5Msv_C1I-d5Jd8o"
+learner_file_url = (
+    "https://drive.google.com/uc?export=download&id=1nkIHl2pttPFy8n0rv5Msv_C1I-d5Jd8o"
+)
 learner_file_name = "export.pkl"
 
 classes = ["pochard", "chaffinch", "pigeon"]
@@ -41,30 +43,29 @@ app.add_middleware(
 )
 
 
-# async def download_file(url, dest):
-#     if dest.exists():
-#         return
-#     async with aiohttp.ClientSession() as session:
-#         async with session.get(url) as response:
-#             data = await response.read()
-#             with open(dest, "wb") as f:
-#                 f.write(data)
+async def download_file(url, dest):
+    if dest.exists():
+        return
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            data = await response.read()
+            with open(dest, "wb") as f:
+                f.write(data)
 
 
 async def setup_learner():
-    # await download_file(learner_file_url, path / learner_file_name)
+    await download_file(learner_file_url, path / learner_file_name)
     # try:
-    learn = load_learner("../server")
+    learn = load_learner(path)
     return learn
 
-
-# except RuntimeError as e:
-#     if len(e.args) > 0 and "CPU-only machine" in e.args[0]:
-#         print(e)
-#         message = "\n\nThis model was trained with an old version of fastai and will not work in a CPU environment.\n\nPlease update the fastai library in your training environment and export your model again.\n\nSee instructions for 'Returning to work' at https://course.fast.ai."
-#         raise RuntimeError(message)
-#     else:
-#         raise
+    # except RuntimeError as e:
+    #     if len(e.args) > 0 and "CPU-only machine" in e.args[0]:
+    #         print(e)
+    #         message = "\n\nThis model was trained with an old version of fastai and will not work in a CPU environment.\n\nPlease update the fastai library in your training environment and export your model again.\n\nSee instructions for 'Returning to work' at https://course.fast.ai."
+    #         raise RuntimeError(message)
+    #     else:
+    #         raise
 
 
 loop = asyncio.get_event_loop()
